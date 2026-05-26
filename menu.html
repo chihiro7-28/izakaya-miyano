@@ -527,14 +527,78 @@
       line-height: 1.8;
     }
 
+    /* ========== アニメーション ========== */
+
+    /* ページヒーロー順次表示 */
+    @keyframes heroUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero-label {
+      opacity: 0;
+      animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+    .page-hero-title {
+      opacity: 0;
+      animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+    }
+    .page-hero-desc {
+      opacity: 0;
+      animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
+    }
+
+    /* ナビスクロール */
+    nav { transition: box-shadow 0.4s ease, background 0.4s ease; }
+    nav.scrolled {
+      box-shadow: 0 2px 24px rgba(44,31,14,0.1);
+      background: rgba(250,246,239,0.99);
+    }
+
     /* フェードイン */
     .fade {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
     .fade.in { opacity: 1; transform: translateY(0); }
+
+    /* セクションEN ラベル → 左スライド */
+    .menu-section-en {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .menu-section-en.in { opacity: 1; transform: translateX(0); }
+
+    /* セクションJA フェードアップ */
+    .menu-section-ja {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.7s ease 0.12s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
+    }
+    .menu-section-ja.in { opacity: 1; transform: translateY(0); }
+
+    /* menu-item スタガーフェード */
+    .menu-item {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    }
+    .menu-item.in { opacity: 1; transform: translateY(0); }
+
+    /* menu-item ホバー左ライン */
+    .menu-item { position: relative; }
+    .menu-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.2s ease;
+    }
+    .menu-item:hover::before { transform: scaleY(1); }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -560,7 +624,7 @@
     <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
     <ul>
       <li><a href="index.html" onclick="closeMenu()">トップ</a></li>
-      <li><a href="menu.html" class="active" onclick="closeMenu()">全メニュー</a></li>
+      <li><a href="index.html#menu" onclick="closeMenu()">おしながき</a></li>
       <li><a href="index.html#interior" onclick="closeMenu()">店内</a></li>
       <li><a href="index.html#access" onclick="closeMenu()">アクセス</a></li>
       <li><a href="index.html#reserve" onclick="closeMenu()">ご予約</a></li>
@@ -590,7 +654,7 @@
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="index.html">トップ</a></li>
-        <li><a href="menu.html" class="active">全メニュー</a></li>
+        <li><a href="index.html#menu">おしながき</a></li>
         <li><a href="index.html#interior">店内</a></li>
         <li><a href="index.html#access">アクセス</a></li>
       </ul>
@@ -981,13 +1045,36 @@
       document.body.style.overflow = '';
     }
 
-    // スクロールフェードイン
+    // navスクロール
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // スクロールフェードイン（fade + セクションラベル）
     const obs = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
-        if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 80);
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 70);
+          obs.unobserve(e.target);
+        }
       });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+    document.querySelectorAll('.fade, .menu-section-en, .menu-section-ja').forEach(el => obs.observe(el));
+
+    // menu-item スタガー（グリッド単位で）
+    const itemObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const items = e.target.querySelectorAll('.menu-item');
+          items.forEach((item, i) => {
+            setTimeout(() => item.classList.add('in'), i * 30);
+          });
+          itemObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.menu-grid').forEach(grid => itemObs.observe(grid));
 
     // カテゴリーナビのアクティブ
     const sections = document.querySelectorAll('.menu-section[id]');

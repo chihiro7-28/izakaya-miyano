@@ -26,14 +26,18 @@
       slides[currentSlide].classList.add('active');
     }, 4000);
 
-    // スクロールでオーバーレイが濃くなる
+    // スクロールでオーバーレイが濃くなる & ナビにshadow付与
     const overlay = document.getElementById('heroOverlay');
+    const navEl = document.querySelector('nav');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const heroH = document.querySelector('.hero').offsetHeight;
-      const opacity = Math.min(scrollY / heroH * 0.8, 0.75);
-      if (overlay) overlay.style.background = `rgba(44,31,14,${opacity})`;
-    });
+      if (overlay) {
+        const heroH = document.querySelector('.hero')?.offsetHeight || 600;
+        const opacity = Math.min(scrollY / heroH * 0.8, 0.75);
+        overlay.style.background = `rgba(44,31,14,${opacity})`;
+      }
+      if (navEl) navEl.classList.toggle('scrolled', scrollY > 40);
+    }, { passive: true });
 
     // カテゴリータブ切り替え
     function switchCat(idx, el) {
@@ -98,17 +102,19 @@
     const obs = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('in'), i * 100);
+          setTimeout(() => e.target.classList.add('in'), i * 80);
+          obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+    document.querySelectorAll('.fade, .section-label, .section-title, .divider').forEach(el => obs.observe(el));
 
     const obsBlur = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('in'), i * 120);
+          setTimeout(() => e.target.classList.add('in'), i * 100);
+          obsBlur.unobserve(e.target);
         }
       });
     }, { threshold: 0.08 });

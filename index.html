@@ -29,6 +29,7 @@
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
     <ul>
+      <li><a href="#" onclick="closeMenu()">トップ</a></li>
       <li><a href="#menu" onclick="closeMenu()">おしながき</a></li>
       <li><a href="#interior" onclick="closeMenu()">店内</a></li>
       <li><a href="#access" onclick="closeMenu()">アクセス</a></li>
@@ -58,6 +59,7 @@
     </a>
     <div class="nav-right">
       <ul class="nav-links">
+        <li><a href="#">トップ</a></li>
         <li><a href="#menu">おしながき</a></li>
         <li><a href="#interior">店内</a></li>
         <li><a href="#access">アクセス</a></li>
@@ -164,9 +166,9 @@
     <div class="section-label">Menu</div>
     <h2 class="section-title">おしながき</h2>
     <div class="divider"></div>
-    <p style="font-size:14px;color:var(--ink2);margin-bottom:2rem;line-height:1.9;">地元の食材にこだわった、みやの自慢の料理をご紹介します。</p>
+    <p class="fade" style="font-size:14px;color:var(--ink2);margin-bottom:2rem;line-height:1.9;">地元の食材にこだわった、みやの自慢の料理をご紹介します。</p>
 
-    <div class="menu-cat-tabs" id="menuTabs">
+    <div class="menu-cat-tabs fade" id="menuTabs">
       <button class="menu-cat-tab active" onclick="switchCat(0,this)">とりあえず一品</button>
       <button class="menu-cat-tab" onclick="switchCat(1,this)">焼き物・串</button>
       <button class="menu-cat-tab" onclick="switchCat(2,this)">揚げ物</button>
@@ -449,7 +451,7 @@
 
     </div>
 
-    <div style="text-align:center;margin-top:2.5rem;">
+    <div class="fade" style="text-align:center;margin-top:2.5rem;">
       <a href="menu.html" class="btn btn-outline" style="color:var(--ink2);border-color:var(--border);">全メニューを見る →</a>
     </div>
   </section>
@@ -458,7 +460,7 @@
   <section id="interior" class="interior">
     <div class="section-label">Interior</div>
     <h2 class="section-title">店内のご案内</h2>
-    <p style="font-size:14px;color:var(--ink2);line-height:1.9;margin-bottom:3rem;">お座敷・イス席・掘りごたつ個室など、シーンに合わせたお席をご用意しております。お子様連れも歓迎です。</p>
+    <p class="fade" style="font-size:14px;color:var(--ink2);line-height:1.9;margin-bottom:3rem;">お座敷・イス席・掘りごたつ個室など、シーンに合わせたお席をご用意しております。お子様連れも歓迎です。</p>
     <div class="interior-slider-wrap fade">
       <div class="interior-slider" id="interiorSlider">
         <div class="interior-slide">
