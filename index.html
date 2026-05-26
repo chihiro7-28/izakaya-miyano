@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="居酒屋みやの｜岐阜県加茂郡川辺町。地元の味と温もりをお届けする居酒屋。飛騨牛・地鶏・新鮮刺身など。">
+  <title>居酒屋みやの｜川辺町の居酒屋</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #faf6ef;
+      --bg2:      #f3ede2;
+      --bg3:      #ede4d3;
+      --ink:      #2c1f0e;
+      --ink2:     #5a3e25;
+      --ink3:     #8b6f47;
+      --accent:   #8b2e0e;
+      --gold:     #c9a84c;
+      --border:   rgba(139,111,71,0.2);
+      --serif:    'Noto Serif JP', serif;
+      --sans:     'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeInBlur {
+      0% { opacity: 0; filter: blur(8px); transform: translateY(16px); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+
+    /* 和紙テクスチャ風オーバーレイ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(250,246,239,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .nav-logo span {
+      font-size: 10px;
+      color: var(--ink3);
+      display: block;
+      letter-spacing: 0.12em;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--ink2);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-insta {
+      display: flex;
+      align-items: center;
+      color: var(--ink2);
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .nav-insta:hover { color: var(--accent); }
+
+    .nav-tel {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 5px 14px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-tel:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ハンバーガー */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 2px;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 1.5px;
+      background: var(--ink2);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* モバイルメニュー */
+    .mobile-menu {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 75vw;
+      max-width: 300px;
+      background: var(--bg);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 2rem 3rem;
+      box-sizing: border-box;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+      box-shadow: -4px 0 24px rgba(44,31,14,0.12);
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44,31,14,0.4);
+      z-index: 140;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .mobile-menu-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      color: var(--ink2);
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu-close:hover { color: var(--accent); }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-menu ul li {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu ul a {
+      display: block;
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      padding: 1rem 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu ul a:hover { color: var(--accent); }
+
+    .mobile-menu-contact {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mobile-menu .mobile-tel {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      display: block;
+    }
+
+    .mobile-menu .mobile-tel-sub {
+      font-size: 11px;
+      color: var(--ink3);
+      display: block;
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .mobile-menu .mobile-insta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink2);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      font-family: var(--sans);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu .mobile-insta:hover { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .nav-links { display: none !important; }
+      .nav-tel { display: none !important; }
+      .nav-insta { display: none !important; }
+      .nav-logo span { display: none; }
+      .hamburger { display: flex !important; }
+      .hero { padding: 0 1.25rem 4rem; }
+      section { padding: 4rem 1.25rem; }
+      .access-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .interior-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .menu-items { grid-template-columns: 1fr; }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 2.5rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=1600&q=85') center/cover no-repeat;
+      filter: brightness(0.45) sepia(0.3);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,31,14,0.85) 0%, rgba(44,31,14,0.2) 60%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+    }
+
+    .hero-kamon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      font-family: var(--sans);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 300;
+      color: #faf6ef;
+      line-height: 1.15;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: rgba(250,246,239,0.75);
+      line-height: 2;
+      margin-bottom: 2rem;
+      max-width: 380px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 10px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #6e2208;
+      border-color: #6e2208;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #faf6ef;
+      border: 1px solid rgba(250,246,239,0.5);
+    }
+
+    .btn-outline:hover {
+      background: rgba(250,246,239,0.1);
+      border-color: #faf6ef;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      writing-mode: vertical-rl;
+      font-size: 10px;
+      color: rgba(250,246,239,0.4);
+      letter-spacing: 0.2em;
+      z-index: 1;
+    }
+
+    /* SECTION共通 */
+    section {
+      padding: 6rem 2.5rem;
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      letter-spacing: 0.1em;
+      line-height: 1.4;
+      margin-bottom: 3rem;
+    }
+
+
+    .section-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .otoshi-note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      background: var(--bg);
+    }
+
+    .otoshi-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .otoshi-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+    }
+
+    .otoshi-sub {
+      font-size: 13px;
+      color: var(--ink2);
+    }
+
+    .otoshi-story {
+      font-size: 12px;
+      color: var(--ink3);
+      margin-top: 2px;
+    }
+
+    .otoshi-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--accent);
+      padding: 8px 16px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .otoshi-link:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .otoshi-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .otoshi-link { width: 100%; justify-content: center; }
+    }
+
+    /* 仕切り線 */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1rem 0 2rem;
+    }
+
+    /* こだわり */
+    .features {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+    }
+
+    .feature-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.35) sepia(0.2);
+      transition: transform 0.5s ease, filter 0.5s ease;
+      position: absolute;
+      inset: 0;
+    }
+
+    .feature-item:hover .feature-img {
+      transform: scale(1.04);
+      filter: brightness(0.28) sepia(0.2);
+    }
+
+    .feature-body {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      background: linear-gradient(transparent 20%, rgba(44,31,14,0.75) 100%);
+      text-align: left;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-item {
+      text-align: center;
+    }
+
+    .feature-num {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.8;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: #faf6ef;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: rgba(250,246,239,0.75);
+      line-height: 1.8;
+    }
+
+    /* おしながき */
+    .menu-section { background: var(--bg); }
+
+    .menu-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      font-family: var(--serif);
+      font-size: 14px;
+      padding: 0.75rem 1.5rem;
+      color: var(--ink3);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .menu-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .menu-tab:hover { color: var(--ink); }
+
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    .menu-category {
+      margin-bottom: 2.5rem;
+    }
+
+    .menu-category-title {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink2);
+      border-left: 3px solid var(--gold);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 13px;
+    }
+
+    .menu-item-name { color: var(--ink); }
+
+    .menu-item-price {
+      font-family: var(--serif);
+      color: var(--ink3);
+      white-space: nowrap;
+      margin-left: 1rem;
+      font-size: 12px;
+    }
+
+    /* 店内 */
+    .interior {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 店内スライダー */
+    .interior-slider-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .interior-slider {
+      display: flex;
+      transition: transform 0.45s ease;
+    }
+
+    .interior-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .interior-slide img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.75) sepia(0.1);
+      cursor: zoom-in;
+    }
+
+    .interior-slide-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 2rem 1.5rem;
+      background: linear-gradient(transparent, rgba(44,31,14,0.8));
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .interior-slide-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      font-family: var(--sans);
+    }
+
+    .interior-slide-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: #faf6ef;
+      letter-spacing: 0.1em;
+    }
+
+    .interior-slide-cap {
+      font-size: 13px;
+      color: rgba(250,246,239,0.65);
+    }
+
+    .interior-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(250,246,239,0.85);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 22px;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+      line-height: 1;
+      padding-bottom: 2px;
+    }
+
+    .interior-btn:hover { background: #faf6ef; }
+    .interior-prev { left: 12px; }
+    .interior-next { right: 12px; }
+
+    .interior-dots {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .interior-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(250,246,239,0.45);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .interior-dot.active { background: #faf6ef; }
+
+    @media (max-width: 768px) {
+      .interior-slide img { height: 280px; }
+      .interior-slide-name { font-size: 18px; }
+    }
+
+    /* お知らせ */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .news-item {
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+
+    .news-date {
+      font-family: var(--mono, monospace);
+      font-size: 12px;
+      color: var(--ink3);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+
+    .news-text {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .news-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+    /* アクセス */
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .access-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .access-grid .map-wrap {
+        order: -1;
+      }
+    }
+
+    .access-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .access-row {
+      background: var(--bg);
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .access-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--ink3);
+      min-width: 70px;
+      font-family: var(--sans);
+      padding-top: 2px;
+    }
+
+    .access-value {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .access-value a {
+      color: var(--accent);
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 20px;
+    }
+
+    .map-wrap {
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 300px;
+      display: block;
+      border: none;
+    }
+
+    /* 予約 */
+    .reservation {
+      background: var(--ink);
+      padding: 5rem 2rem;
+    }
+
+    .reservation-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .reservation-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.75rem;
+      font-family: var(--sans);
+    }
+
+    .reservation-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-weight: 300;
+      color: var(--bg);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .reservation-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: 0.5;
+    }
+
+    .reservation-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(250,246,239,0.1);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .reservation-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reservation-card {
+      background: rgba(250,246,239,0.04);
+      padding: 1.5rem 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: block;
+    }
+
+    .reservation-card:hover {
+      background: rgba(250,246,239,0.08);
+    }
+
+    .reservation-card-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+      opacity: 0.8;
+    }
+
+    .reservation-card-num {
+      font-family: var(--serif);
+      font-size: clamp(18px, 4vw, 24px);
+      color: #faf6ef;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .reservation-note {
+      font-size: 12px;
+      color: rgba(250,246,239,0.65);
+      letter-spacing: 0.06em;
+      line-height: 1.9;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a1008;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: 11px;
+      color: rgba(250,246,239,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: rgba(250,246,239,0.5);
+      letter-spacing: 0.2em;
+    }
+
+    /* カテゴリータブ */
+    .menu-cat-tabs {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .menu-cat-tab {
+      font-family: var(--serif);
+      font-size: 13px;
+      padding: 0.65rem 1.25rem;
+      color: var(--ink3);
+      cursor: pointer;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      background: none;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .menu-cat-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .menu-cat-tab:hover { color: var(--ink); }
+
+    .menu-cat-panels { position: relative; }
+    .menu-cat-panel { display: none; }
+    .menu-cat-panel.active { display: block; }
+
+    /* スライダー */
+    .menu-slider-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-slider {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .menu-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .menu-slide img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9) sepia(0.1);
+    }
+
+    .menu-slide-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(44,31,14,0.75));
+      color: #faf6ef;
+      font-family: var(--serif);
+      font-size: 16px;
+      padding: 2rem 1.5rem 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(250,246,239,0.85);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 22px;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+      line-height: 1;
+      padding-bottom: 2px;
+    }
+
+    .slider-btn:hover { background: #faf6ef; }
+    .slider-prev { left: 12px; }
+    .slider-next { right: 12px; }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(250,246,239,0.5);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dot.active { background: #faf6ef; }
+
+    /* アコーディオン */
+    .menu-accordion { margin-top: 0.5rem; }
+
+    .accordion-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--ink2);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+
+    .accordion-btn:hover { background: var(--bg3); }
+
+    .accordion-icon {
+      font-size: 18px;
+      color: var(--gold);
+      transition: transform 0.3s;
+      line-height: 1;
+    }
+
+    .accordion-btn.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .accordion-body.open {
+      max-height: 2000px;
+    }
+
+    .menu-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+
+    .menu-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      background: var(--bg);
+      font-size: 13px;
+      gap: 1rem;
+      transition: background 0.15s;
+    }
+
+    .menu-list-item:hover { background: var(--bg2); }
+
+    .menu-list-parent { align-items: flex-start; }
+
+    .menu-list-children {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 6px;
+    }
+
+    .menu-list-child {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--ink3);
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
+    }
+
+    .menu-list-child span:last-child {
+      color: var(--ink3) !important;
+      font-size: 12px !important;
+    }
+
+    .menu-list-item span:first-child {
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .menu-list-item span:last-child {
+      color: var(--accent);
+      white-space: nowrap;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    /* メニューカード（旧スタイル、念のため残す） */
+    
+    .menu-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .menu-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(44,31,14,0.1);
+    }
+
+    .menu-card-img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.92) sepia(0.1);
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover .menu-card-img img {
+      transform: scale(1.05);
+    }
+
+    .menu-card-cat {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #faf6ef;
+      background: rgba(44,31,14,0.65);
+      padding: 3px 10px;
+      border-radius: 2px;
+      backdrop-filter: blur(4px);
+    }
+
+    .menu-card-body {
+      padding: 1.25rem;
+    }
+
+    .menu-card-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-card-desc {
+      font-size: 12px;
+      color: var(--ink2);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-card-price {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .menu-card-price span {
+      font-size: 13px;
+      color: var(--ink3);
+      margin-left: 2px;
+    }
+
+    /* フェードイン */
+    .fade {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade.in { opacity: 1; transform: translateY(0); }
+
+
+
+    @media (max-width: 480px) {
+      .menu-items { grid-template-columns: 1fr; }
+    }
+
+    /* ライトボックス */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 3rem 1rem 4rem;
+      box-sizing: border-box;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      max-width: 80vw;
+    }
+
+    .lightbox-content img {
+      max-width: 80vw;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 2px;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-caption {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.08em;
+      text-align: center;
+      min-height: 1.5em;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-nav {
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      font-size: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      padding-bottom: 2px;
+    }
+
+    .lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+
+    .lightbox-dots {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+
+    .lightbox-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-dot.active { background: #fff; }
+
+    @media (max-width: 768px) {
+      .lightbox { padding: 3rem 0.5rem 4rem; gap: 0.5rem; }
+      .lightbox-content { max-width: 92vw; }
+      .lightbox-content img { max-width: 92vw; }
+      .lightbox-nav { width: 36px; height: 36px; font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ライトボックス -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+    <div class="lightbox-dots" id="lightboxDots"></div>
+  </div>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
+    <ul>
+      <li><a href="#menu" onclick="closeMenu()">おしながき</a></li>
+      <li><a href="#interior" onclick="closeMenu()">店内</a></li>
+      <li><a href="#access" onclick="closeMenu()">アクセス</a></li>
+      <li><a href="#reserve" onclick="closeMenu()">ご予約</a></li>
+    </ul>
+    <div class="mobile-menu-contact">
+      <div>
+        <a href="tel:0574532077" class="mobile-tel">0574-53-2077</a>
+        <a href="tel:09079103348" class="mobile-tel">090-7910-3348</a>
+        <span class="mobile-tel-sub">営業時間 17:30〜23:30 ／ 定休日：火曜</span>
+      </div>
+      <a href="https://www.instagram.com/izakaya_miyata?igsh=MWE5ZXg5ZGN2eHVmNg==" target="_blank" rel="noopener" class="mobile-insta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      居酒屋みやの
+      <span>Izakaya Miyano — Kawabe, Gifu</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#menu">おしながき</a></li>
+        <li><a href="#interior">店内</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+      <a href="https://www.instagram.com/izakaya_miyata?igsh=MWE5ZXg5ZGN2eHVmNg==" target="_blank" rel="noopener" class="nav-insta" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" style="display:block;">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="#reserve" class="nav-tel">ご予約</a>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=1600&q=85" alt="居酒屋の料理">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=1600&q=85" alt="地鶏炭火焼き">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=85" alt="店内の様子">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1600&q=85" alt="もつ鍋">
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay-scroll" id="heroOverlay"></div>
+    <div class="hero-content">
+      <svg class="hero-kamon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="1"/>
+        <circle cx="24" cy="24" r="16" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+        <path d="M24 8 L24 40 M8 24 L40 24 M12 12 L36 36 M36 12 L12 36" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="24" cy="24" r="4" fill="#c9a84c" opacity="0.6"/>
+      </svg>
+      <div class="hero-label">居酒屋みやの — Kawabe, Gifu</div>
+      <h1 class="hero-title">地元の<em>味</em>と<br>温もりを。</h1>
+      <p class="hero-desc">岐阜県加茂郡川辺町。<br>飛騨牛・地鶏・新鮮刺身など、地元の食材にこだわったお料理を、落ち着いた空間でお楽しみください。</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-primary">おしながきを見る</a>
+        <a href="#reserve" class="btn btn-outline">ご予約はこちら</a>
+      </div>
+    </div>
+    <div class="hero-scroll">scroll ↓</div>
+  </div>
+
+  <!-- こだわり -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-item fade">
+        <img class="feature-img" src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&q=80" alt="地元の食材">
+        <div class="feature-body">
+          <div class="feature-num">01</div>
+          <div class="feature-title">地元の食材</div>
+          <div class="feature-desc">飛騨牛・地鶏・明宝ハムなど、岐阜の恵みを大切に使っています。</div>
+        </div>
+      </div>
+      <div class="feature-item fade">
+        <img class="feature-img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" alt="手作りの味">
+        <div class="feature-body">
+          <div class="feature-num">02</div>
+          <div class="feature-title">手作りの味</div>
+          <div class="feature-desc">豆腐・チヂミ・バナナジュースなど、手間を惜しまず丁寧に仕込んでいます。</div>
+        </div>
+      </div>
+      <div class="feature-item fade">
+        <img class="feature-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="温かい空間">
+        <div class="feature-body">
+          <div class="feature-num">03</div>
+          <div class="feature-title">温かい空間</div>
+          <div class="feature-desc">のんびりとした時間の中で、ゆっくり一杯。一人飲みから宴会まで、お気軽にどうぞ。</div>
+        </div>
+      </div>
+    </div>
+    <div class="otoshi-note fade">
+      <div class="otoshi-left">
+        <div class="otoshi-title">本日のお通し</div>
+        <div class="otoshi-sub">日替わり2種からお選びいただけます</div>
+        <div class="otoshi-story">メニューはInstagramストーリーでご案内しています。</div>
+      </div>
+      <a href="https://www.instagram.com/izakaya_miyata?igsh=MWE5ZXg5ZGN2eHVmNg==" target="_blank" rel="noopener" class="otoshi-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagramを見る
+      </a>
+    </div>
+  </section>
+
+  <!-- おしながき -->
+  <section id="menu" class="menu-section">
+    <div class="section-label">Menu</div>
+    <h2 class="section-title">おしながき</h2>
+    <div class="divider"></div>
+    <p style="font-size:14px;color:var(--ink2);margin-bottom:2rem;line-height:1.9;">地元の食材にこだわった、みやの自慢の料理をご紹介します。</p>
+
+    <div class="menu-cat-tabs" id="menuTabs">
+      <button class="menu-cat-tab active" onclick="switchCat(0,this)">とりあえず一品</button>
+      <button class="menu-cat-tab" onclick="switchCat(1,this)">焼き物・串</button>
+      <button class="menu-cat-tab" onclick="switchCat(2,this)">揚げ物</button>
+      <button class="menu-cat-tab" onclick="switchCat(3,this)">特撰</button>
+      <button class="menu-cat-tab" onclick="switchCat(4,this)">ご飯・麺</button>
+      <button class="menu-cat-tab" onclick="switchCat(5,this)">鍋</button>
+      <button class="menu-cat-tab" onclick="switchCat(6,this)">お刺身・サラダ・デザート</button>
+    </div>
+
+    <div class="menu-cat-panels">
+
+      <!-- 0: とりあえず一品 -->
+      <div class="menu-cat-panel active" data-label="とりあえず一品">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-0">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="手作り豆腐"><div class="menu-slide-label">手作り豆腐 495円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="枝豆"><div class="menu-slide-label">枝豆 418円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=600&q=80" alt="明宝ハム"><div class="menu-slide-label">明宝ハム 生 715円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=600&q=80" alt="たこわさ"><div class="menu-slide-label">たこわさ 638円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(0,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(0,1)">›</button>
+          <div class="slider-dots" id="dots-0">
+            <span class="dot active" onclick="slideTo(0,0)"></span>
+            <span class="dot" onclick="slideTo(0,1)"></span>
+            <span class="dot" onclick="slideTo(0,2)"></span>
+            <span class="dot" onclick="slideTo(0,3)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">とりあえず一品メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>トマトスライス</span><span>385円</span></div>
+            <div class="menu-list-item"><span>オニオンスライス</span><span>385円</span></div>
+            <div class="menu-list-item"><span>枝豆</span><span>418円</span></div>
+            <div class="menu-list-item"><span>明宝ハム 生</span><span>715円</span></div>
+            <div class="menu-list-item"><span>梅キュー</span><span>385円</span></div>
+            <div class="menu-list-item"><span>もろキュー</span><span>440円</span></div>
+            <div class="menu-list-item"><span>イカの塩辛</span><span>638円</span></div>
+            <div class="menu-list-item"><span>たこわさ</span><span>638円</span></div>
+            <div class="menu-list-item"><span>白菜漬け物</span><span>418円</span></div>
+            <div class="menu-list-item"><span>ピリ辛きゅうり</span><span>440円</span></div>
+            <div class="menu-list-item"><span>じゃこおろし</span><span>440円</span></div>
+            <div class="menu-list-item"><span>長芋たんざく</span><span>440円</span></div>
+            <div class="menu-list-item"><span>納豆</span><span>330円</span></div>
+            <div class="menu-list-item"><span>韓国のり</span><span>330円</span></div>
+            <div class="menu-list-item"><span>のり巻きチーズ</span><span>528円</span></div>
+            <div class="menu-list-item"><span>手作り豆腐</span><span>495円</span></div>
+            <div class="menu-list-item"><span>ピスタチオ</span><span>418円</span></div>
+            <div class="menu-list-item"><span>カシューナッツ</span><span>418円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1: 焼き物・串 -->
+      <div class="menu-cat-panel" data-label="焼き物・串">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-1">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80" alt="やきとり"><div class="menu-slide-label">やきとり 塩 330円〜</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" alt="みつこのチヂミ"><div class="menu-slide-label">みつこのチヂミ 858円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600&q=80" alt="だし巻き玉子"><div class="menu-slide-label">だし巻き玉子 605円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=600&q=80" alt="ケイチャン鉄板焼き"><div class="menu-slide-label">ケイチャン鉄板焼き 726円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(1,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(1,1)">›</button>
+          <div class="slider-dots" id="dots-1">
+            <span class="dot active" onclick="slideTo(1,0)"></span>
+            <span class="dot" onclick="slideTo(1,1)"></span>
+            <span class="dot" onclick="slideTo(1,2)"></span>
+            <span class="dot" onclick="slideTo(1,3)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">焼き物・串メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>にんにくバター</span><span>858円</span></div>
+            <div class="menu-list-item"><span>だし巻き玉子</span><span>605円</span></div>
+            <div class="menu-list-item"><span>ししゃも</span><span>528円</span></div>
+            <div class="menu-list-item"><span>丸干しいわし</span><span>580円</span></div>
+            <div class="menu-list-item"><span>もやしピリ辛炒め</span><span>440円</span></div>
+            <div class="menu-list-item"><span>ケイチャン鉄板焼き</span><span>726円</span></div>
+            <div class="menu-list-item"><span>とんちゃん鉄板焼き</span><span>726円</span></div>
+            <div class="menu-list-item"><span>豆腐ステーキ</span><span>748円</span></div>
+            <div class="menu-list-item"><span>豚キムチ</span><span>836円</span></div>
+            <div class="menu-list-item"><span>みつこのチヂミ</span><span>858円</span></div>
+            <div class="menu-list-item"><span>久田見あげ三コ</span><span>330円</span></div>
+            <div class="menu-list-item"><span>・ネギ入り</span><span>495円</span></div>
+            <div class="menu-list-item"><span>・チーズ入り</span><span>545円</span></div>
+            <div class="menu-list-item"><span>・納豆入り</span><span>495円</span></div>
+            <div class="menu-list-item"><span>明宝ハム 焼き</span><span>715円</span></div>
+            <div class="menu-list-item"><span>やきとり 塩 二本</span><span>330円</span></div>
+            <div class="menu-list-item"><span>やきとり たれ 二本</span><span>385円</span></div>
+            <div class="menu-list-item"><span>砂肝 二本</span><span>275円</span></div>
+            <div class="menu-list-item"><span>ネギマ 二本</span><span>451円</span></div>
+            <div class="menu-list-item"><span>ぼんじり串 一本</span><span>242円</span></div>
+            <div class="menu-list-item"><span>せせり串 一本</span><span>242円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2: 揚げ物 -->
+      <div class="menu-cat-panel" data-label="揚げ物">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-2">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=600&q=80" alt="唐揚げ"><div class="menu-slide-label">とりの唐揚げ 858円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80" alt="天ぷら"><div class="menu-slide-label">イカ下足天ぷら 792円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1630431341973-02e1b662ec35?w=600&q=80" alt="カツ煮"><div class="menu-slide-label">カツ煮 935円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1619881590738-a111d176d906?w=600&q=80" alt="揚げだし豆腐"><div class="menu-slide-label">揚げだし豆腐 748円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(2,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(2,1)">›</button>
+          <div class="slider-dots" id="dots-2">
+            <span class="dot active" onclick="slideTo(2,0)"></span>
+            <span class="dot" onclick="slideTo(2,1)"></span>
+            <span class="dot" onclick="slideTo(2,2)"></span>
+            <span class="dot" onclick="slideTo(2,3)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">揚げ物メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>フライドポテト</span><span>385円</span></div>
+            <div class="menu-list-item"><span>カリカリチーズ</span><span>666円</span></div>
+            <div class="menu-list-item"><span>イカ下足天ぷら</span><span>792円</span></div>
+            <div class="menu-list-item"><span>さきいかの天ぷら</span><span>605円</span></div>
+            <div class="menu-list-item"><span>ちくわの磯辺揚げ</span><span>550円</span></div>
+            <div class="menu-list-item"><span>ちくわチーズ天ぷら</span><span>660円</span></div>
+            <div class="menu-list-item"><span>トウモロコシ天ぷら</span><span>693円</span></div>
+            <div class="menu-list-item"><span>玉ねぎの天ぷら</span><span>550円</span></div>
+            <div class="menu-list-item"><span>さつまいもの天ぷら</span><span>550円</span></div>
+            <div class="menu-list-item"><span>揚げたこやき</span><span>550円</span></div>
+            <div class="menu-list-item"><span>とりの唐揚げ</span><span>858円</span></div>
+            <div class="menu-list-item"><span>とりのなんこつ</span><span>528円</span></div>
+            <div class="menu-list-item"><span>ササミチーズカツ</span><span>748円</span></div>
+            <div class="menu-list-item"><span>甘エビの唐揚げ</span><span>528円</span></div>
+            <div class="menu-list-item"><span>タコの唐揚げ</span><span>726円</span></div>
+            <div class="menu-list-item"><span>カツ煮</span><span>935円</span></div>
+            <div class="menu-list-item"><span>揚げだし豆腐</span><span>748円</span></div>
+            <div class="menu-list-item"><span>とり皮 塩</span><span>330円</span></div>
+            <div class="menu-list-item"><span>とり皮 たれ</span><span>385円</span></div>
+            <div class="menu-list-item"><span>じゃがバター</span><span>704円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: 特撰 -->
+      <div class="menu-cat-panel" data-label="特撰">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-3">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80" alt="地鶏炭火焼き"><div class="menu-slide-label">地鶏炭火焼き 880円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1623689046286-e074832b8c28?w=600&q=80" alt="馬刺し赤身"><div class="menu-slide-label">馬刺し赤身 1,200円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=600&q=80" alt="馬タン刺身"><div class="menu-slide-label">馬タン刺身 1,500円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" alt="赤鶏たたき"><div class="menu-slide-label">赤鶏たたき 858円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(3,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(3,1)">›</button>
+          <div class="slider-dots" id="dots-3">
+            <span class="dot active" onclick="slideTo(3,0)"></span>
+            <span class="dot" onclick="slideTo(3,1)"></span>
+            <span class="dot" onclick="slideTo(3,2)"></span>
+            <span class="dot" onclick="slideTo(3,3)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">特撰メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>地鶏炭火焼き</span><span>880円</span></div>
+            <div class="menu-list-item"><span>鶏ササミ炙り焼き</span><span>680円</span></div>
+            <div class="menu-list-item"><span>赤鶏たたき</span><span>858円</span></div>
+            <div class="menu-list-item"><span>地鶏のたたき</span><span>880円</span></div>
+            <div class="menu-list-item"><span>鶏塩辛</span><span>858円</span></div>
+            <div class="menu-list-item"><span>馬タン刺身</span><span>1,500円</span></div>
+            <div class="menu-list-item"><span>馬刺し赤身</span><span>1,200円</span></div>
+            <div class="menu-list-item"><span>馬刺しレバー</span><span>1,702円</span></div>
+            <div class="menu-list-item"><span>馬刺し背脂（たてがみ）</span><span>1,360円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: ご飯・麺 -->
+      <div class="menu-cat-panel" data-label="ご飯・麺">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-4">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80" alt="ラーメン"><div class="menu-slide-label">しょうゆラーメン 770円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="チャーハン"><div class="menu-slide-label">ガーリックチャーハン 1,100円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1571748982800-fa51082c2224?w=600&q=80" alt="うどん"><div class="menu-slide-label">肉うどん 826円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&q=80" alt="かつ丼"><div class="menu-slide-label">かつ丼 1,133円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(4,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(4,1)">›</button>
+          <div class="slider-dots" id="dots-4">
+            <span class="dot active" onclick="slideTo(4,0)"></span>
+            <span class="dot" onclick="slideTo(4,1)"></span>
+            <span class="dot" onclick="slideTo(4,2)"></span>
+            <span class="dot" onclick="slideTo(4,3)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">ご飯・麺メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>おにぎり（こぶ／梅）</span><span>198円</span></div>
+            <div class="menu-list-item"><span>おにぎり（焼鮭／しぐれ）</span><span>303円</span></div>
+            <div class="menu-list-item"><span>お茶漬け（こぶ／梅）</span><span>580円</span></div>
+            <div class="menu-list-item"><span>お茶漬け（しぐれ）</span><span>660円</span></div>
+            <div class="menu-list-item"><span>お茶漬け（焼鮭/イカ塩辛/タコわさ）</span><span>770円</span></div>
+            <div class="menu-list-item"><span>ごはん</span><span>198円</span></div>
+            <div class="menu-list-item"><span>みそ汁</span><span>275円</span></div>
+            <div class="menu-list-item"><span>焼豚チャーハン</span><span>748円</span></div>
+            <div class="menu-list-item"><span>ガーリックチャーハン</span><span>1,100円</span></div>
+            <div class="menu-list-item"><span>キムチチャーハン</span><span>853円</span></div>
+            <div class="menu-list-item"><span>高菜チャーハン</span><span>913円</span></div>
+            <div class="menu-list-item"><span>梅じゃこチャーハン</span><span>853円</span></div>
+            <div class="menu-list-item"><span>かつ丼</span><span>1,133円</span></div>
+            <div class="menu-list-item"><span>しょうゆラーメン</span><span>770円</span></div>
+            <div class="menu-list-item"><span>とんこつラーメン</span><span>770円</span></div>
+            <div class="menu-list-item"><span>ソース焼きそば</span><span>680円</span></div>
+            <div class="menu-list-item"><span>塩焼きそば</span><span>680円</span></div>
+            <div class="menu-list-item"><span>うどん（月見／玉子とじ／きつね）</span><span>726円</span></div>
+            <div class="menu-list-item"><span>肉うどん</span><span>826円</span></div>
+            <div class="menu-list-item"><span>カレーうどん</span><span>954円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: 鍋 -->
+      <div class="menu-cat-panel" data-label="鍋">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-5">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="もつ鍋"><div class="menu-slide-label">もつ鍋 1,320円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" alt="キムチ鍋"><div class="menu-slide-label">キムチ鍋 1,100円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="湯豆腐"><div class="menu-slide-label">湯豆腐 990円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(5,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(5,1)">›</button>
+          <div class="slider-dots" id="dots-5">
+            <span class="dot active" onclick="slideTo(5,0)"></span>
+            <span class="dot" onclick="slideTo(5,1)"></span>
+            <span class="dot" onclick="slideTo(5,2)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">鍋メニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>キムチ鍋</span><span>1,100円</span></div>
+            <div class="menu-list-item"><span>もつ鍋</span><span>1,320円</span></div>
+            <div class="menu-list-item"><span>湯豆腐</span><span>990円</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6: お刺身・サラダ・デザート -->
+      <div class="menu-cat-panel" data-label="お刺身・サラダ・デザート">
+        <div class="menu-slider-wrap">
+          <div class="menu-slider" id="slider-6">
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80" alt="お刺身"><div class="menu-slide-label">タルイカ 825円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="サラダ"><div class="menu-slide-label">大根サラダ 825円</div></div>
+            <div class="menu-slide"><img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?w=600&q=80" alt="アイス"><div class="menu-slide-label">アイス 418円</div></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(6,-1)">‹</button>
+          <button class="slider-btn slider-next" onclick="slideMove(6,1)">›</button>
+          <div class="slider-dots" id="dots-6">
+            <span class="dot active" onclick="slideTo(6,0)"></span>
+            <span class="dot" onclick="slideTo(6,1)"></span>
+            <span class="dot" onclick="slideTo(6,2)"></span>
+          </div>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">お刺身・サラダ・デザートメニューを見る <span class="accordion-icon">＋</span></button>
+        <div class="accordion-body">
+          <div class="menu-list-grid">
+            <div class="menu-list-item"><span>タルイカ（刺身）</span><span>825円</span></div>
+            <div class="menu-list-item"><span>ほたて（刺身）</span><span>825円</span></div>
+            <div class="menu-list-item"><span>大根サラダ</span><span>825円</span></div>
+            <div class="menu-list-item"><span>大根サラダハーフ</span><span>550円</span></div>
+            <div class="menu-list-item"><span>トマトサラダ</span><span>825円</span></div>
+            <div class="menu-list-item"><span>ツナサラダ</span><span>825円</span></div>
+            <div class="menu-list-item"><span>アイス</span><span>418円</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="https://izakaya-miyata.com/menu.html" target="_blank" rel="noopener" class="btn btn-outline" style="color:var(--ink2);border-color:var(--border);">全メニューを見る →</a>
+    </div>
+  </section>
+
+  <!-- 店内 -->
+  <section id="interior" class="interior">
+    <div class="section-label">Interior</div>
+    <h2 class="section-title">店内のご案内</h2>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.9;margin-bottom:3rem;">お座敷・イス席・掘りごたつ個室など、シーンに合わせたお席をご用意しております。お子様連れも歓迎です。</p>
+    <div class="interior-slider-wrap fade">
+      <div class="interior-slider" id="interiorSlider">
+        <div class="interior-slide">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1000&q=80" alt="掘りごたつ個室">
+          <div class="interior-slide-info">
+            <span class="interior-slide-tag">個室</span>
+            <span class="interior-slide-name">掘りごたつ個室</span>
+            <span class="interior-slide-cap">2〜6名様</span>
+          </div>
+        </div>
+        <div class="interior-slide">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80" alt="個室">
+          <div class="interior-slide-info">
+            <span class="interior-slide-tag">個室</span>
+            <span class="interior-slide-name">個室（入口すぐ）</span>
+            <span class="interior-slide-cap">2〜6名様</span>
+          </div>
+        </div>
+        <div class="interior-slide">
+          <img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=1000&q=80" alt="テーブル席">
+          <div class="interior-slide-info">
+            <span class="interior-slide-tag">ホール</span>
+            <span class="interior-slide-name">テーブル席</span>
+            <span class="interior-slide-cap">1〜12名様（組み合わせ自由）</span>
+          </div>
+        </div>
+        <div class="interior-slide">
+          <img src="https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=1000&q=80" alt="カウンター席">
+          <div class="interior-slide-info">
+            <span class="interior-slide-tag">カウンター</span>
+            <span class="interior-slide-name">カウンター席</span>
+            <span class="interior-slide-cap">1〜6名様</span>
+          </div>
+        </div>
+      </div>
+      <button class="interior-btn interior-prev" onclick="interiorMove(-1)">‹</button>
+      <button class="interior-btn interior-next" onclick="interiorMove(1)">›</button>
+      <div class="interior-dots" id="interiorDots">
+        <span class="interior-dot active" onclick="interiorTo(0)"></span>
+        <span class="interior-dot" onclick="interiorTo(1)"></span>
+        <span class="interior-dot" onclick="interiorTo(2)"></span>
+        <span class="interior-dot" onclick="interiorTo(3)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- お知らせ -->
+  <section id="news" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="section-label">News</div>
+    <h2 class="section-title">お知らせ</h2>
+    <div class="divider"></div>
+    <div class="news-list">
+      <div class="news-item fade">
+        <div class="news-date">2026.05.01</div>
+        <div class="news-text">ゴールデンウィーク期間中の営業についてのお知らせ</div>
+      </div>
+      <div class="news-item fade">
+        <div class="news-date">2026.04.01</div>
+        <div class="news-text">春の新メニューが始まりました。旬の食材を使った一品をご用意しております。</div>
+      </div>
+      <div class="news-item fade">
+        <div class="news-date">2026.03.15</div>
+        <div class="news-text">ホームページをリニューアルしました。</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink3);margin-top:2rem;text-align:center;">最新情報は
+      <a href="https://www.instagram.com/izakaya_miyata?igsh=MWE5ZXg5ZGN2eHVmNg==" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Instagram</a>
+      でもご確認いただけます。
+    </p>
+  </section>
+
+  <!-- アクセス -->
+  <section id="access">
+    <div class="section-label">Access</div>
+    <h2 class="section-title">アクセス</h2>
+    <div class="divider"></div>
+    <div class="access-grid">
+      <div class="access-info fade">
+        <div class="access-row">
+          <span class="access-label">住所</span>
+          <span class="access-value">〒509-0304<br>岐阜県加茂郡川辺町中川辺119-1</span>
+        </div>
+        <div class="access-row">
+          <span class="access-label">アクセス</span>
+          <span class="access-value">JR高山本線 中川辺駅より徒歩約3分</span>
+        </div>
+        <div class="access-row">
+          <span class="access-label">営業時間</span>
+          <span class="access-value">17:30 〜 23:30<br><small style="color:var(--ink3);font-size:12px;">L.O. 23:00</small></span>
+        </div>
+        <div class="access-row">
+          <span class="access-label">定休日</span>
+          <span class="access-value">毎週火曜日</span>
+        </div>
+        <div class="access-row">
+          <span class="access-label">駐車場</span>
+          <span class="access-value">あり（約5台）</span>
+        </div>
+        <div class="access-row">
+          <span class="access-label">電話</span>
+          <span class="access-value">
+            <a href="tel:0574532077">0574-53-2077</a><br>
+            <a href="tel:09079103348">090-7910-3348</a>
+          </span>
+        </div>
+      </div>
+      <div class="map-wrap fade">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12994.864609183927!2d137.0697453073952!3d35.48656615056874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003174feb53d605%3A0xd6760117b8dd9558!2z5bGF6YWS5bGL44G_44KE44Gf!5e0!3m2!1sja!2sjp!4v1568461245124!5m2!1sja!2sjp" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 予約 -->
+  <section id="reserve" class="reservation">
+    <div class="reservation-inner">
+      <div class="reservation-label">Reservation</div>
+      <h2 class="reservation-title">ご予約・お問い合わせ</h2>
+      <div class="reservation-divider"></div>
+      <div class="reservation-cards">
+        <a href="tel:0574532077" class="reservation-card">
+          <div class="reservation-card-label">固定電話</div>
+          <div class="reservation-card-num">0574-53-2077</div>
+        </a>
+        <a href="sms:09079103348" class="reservation-card">
+          <div class="reservation-card-label">携帯・SMS</div>
+          <div class="reservation-card-num">090-7910-3348</div>
+        </a>
+      </div>
+      <div class="reservation-note">営業時間 17:30〜23:30　定休日：毎週火曜日</div>
+      <div class="reservation-note" style="margin-top:0.25rem;opacity:0.5;">団体様のご予約・ご宴会のご相談もお気軽にどうぞ</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">居酒屋みやの</div>
+    <p>© 2026 居酒屋みやの — 岐阜県加茂郡川辺町中川辺</p>
+  </footer>
+
+  <script>
+    // ハンバーガーメニュー
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      menuOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ヒーロースライドショー
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 4000);
+
+    // スクロールでオーバーレイが濃くなる
+    const overlay = document.getElementById('heroOverlay');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroH = document.querySelector('.hero').offsetHeight;
+      const opacity = Math.min(scrollY / heroH * 0.8, 0.75);
+      if (overlay) overlay.style.background = `rgba(44,31,14,${opacity})`;
+    });
+
+    // カテゴリータブ切り替え
+    function switchCat(idx, el) {
+      document.querySelectorAll('.menu-cat-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-cat-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-cat-panel')[idx].classList.add('active');
+      el.classList.add('active');
+    }
+
+    // スライダー状態管理
+    const sliderState = [0,0,0,0,0,0];
+
+    function slideMove(id, dir) {
+      const slider = document.getElementById('slider-' + id);
+      const total = slider.children.length;
+      sliderState[id] = (sliderState[id] + dir + total) % total;
+      updateSlider(id);
+    }
+
+    function slideTo(id, idx) {
+      sliderState[id] = idx;
+      updateSlider(id);
+    }
+
+    function updateSlider(id) {
+      const slider = document.getElementById('slider-' + id);
+      slider.style.transform = 'translateX(-' + (sliderState[id] * 100) + '%)';
+      document.querySelectorAll('#dots-' + id + ' .dot').forEach((d, i) => {
+        d.classList.toggle('active', i === sliderState[id]);
+      });
+    }
+
+    // アコーディオン
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      btn.classList.toggle('open');
+      body.classList.toggle('open');
+    }
+
+    // 店内スライダー
+    let interiorIdx = 0;
+    const interiorSlider = document.getElementById('interiorSlider');
+    const interiorDots = document.querySelectorAll('.interior-dot');
+
+    function interiorMove(dir) {
+      const total = interiorSlider.children.length;
+      interiorIdx = (interiorIdx + dir + total) % total;
+      updateInterior();
+    }
+
+    function interiorTo(idx) {
+      interiorIdx = idx;
+      updateInterior();
+    }
+
+    function updateInterior() {
+      interiorSlider.style.transform = `translateX(-${interiorIdx * 100}%)`;
+      interiorDots.forEach((d, i) => d.classList.toggle('active', i === interiorIdx));
+    }
+
+    // スクロールフェードイン
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+    const obsBlur = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 120);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-blur').forEach(el => obsBlur.observe(el));
+
+    // ライトボックス（スライダー形式）
+    let lbImages = [];
+    let lbCaptions = [];
+    let lbIdx = 0;
+
+    function buildLightboxImages() {
+      lbImages = [];
+      lbCaptions = [];
+      document.querySelectorAll('.menu-slide img, .interior-slide img').forEach(img => {
+        lbImages.push(img.src);
+        lbCaptions.push(img.closest('.menu-slide, .interior-slide')?.querySelector('.menu-slide-label, .interior-slide-info .interior-slide-name')?.textContent?.trim() || '');
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => openLightbox(lbImages.indexOf(img.src)));
+      });
+
+      // ドット生成
+      const dotsEl = document.getElementById('lightboxDots');
+      dotsEl.innerHTML = lbImages.map((_, i) => `<span class="lightbox-dot" onclick="lbGoTo(${i})"></span>`).join('');
+    }
+
+    function openLightbox(idx) {
+      lbIdx = idx;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function lbGoTo(idx) {
+      lbIdx = (idx + lbImages.length) % lbImages.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const img = document.getElementById('lightboxImg');
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = lbImages[lbIdx];
+        img.style.opacity = 1;
+      }, 150);
+      document.getElementById('lightboxCaption').textContent = lbCaptions[lbIdx];
+      document.querySelectorAll('.lightbox-dot').forEach((d, i) => d.classList.toggle('active', i === lbIdx));
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', () => lbGoTo(lbIdx - 1));
+    document.getElementById('lightboxNext').addEventListener('click', () => lbGoTo(lbIdx + 1));
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbGoTo(lbIdx - 1);
+      if (e.key === 'ArrowRight') lbGoTo(lbIdx + 1);
+    });
+
+    window.addEventListener('load', buildLightboxImages);
+  </script>
+
+</body>
+</html>
