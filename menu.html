@@ -555,6 +555,88 @@
       background: rgba(250,246,239,0.99);
     }
 
+    /* おすすめカード */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .rec-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .rec-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(44,31,14,0.1);
+    }
+
+    .rec-img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .rec-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.92) sepia(0.08);
+      transition: transform 0.4s ease;
+    }
+
+    .rec-card:hover .rec-img img {
+      transform: scale(1.05);
+    }
+
+    .rec-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 2px;
+      font-family: var(--sans);
+    }
+
+    .rec-info {
+      padding: 0.75rem 0.875rem;
+    }
+
+    .rec-name {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    .rec-price {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .menu-section:nth-child(even) .rec-card {
+      background: var(--bg2);
+    }
+
+    @media (max-width: 768px) {
+      .rec-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
+      }
+    }
+
     /* フェードイン */
     .fade {
       opacity: 0;
@@ -699,6 +781,39 @@
       <span class="menu-section-en">First Dish</span>
       <h2 class="menu-section-ja">とりあえず一品</h2>
     </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="枝豆">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">枝豆</div>
+          <div class="rec-price">418円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="手作り豆腐">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">手作り豆腐</div>
+          <div class="rec-price">495円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=600&q=80" alt="明宝ハム 生">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">明宝ハム 生</div>
+          <div class="rec-price">715円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">トマトスライス</span><span class="menu-item-price">385円</span></div>
       <div class="menu-item"><span class="menu-item-name">オニオンスライス</span><span class="menu-item-price">385円</span></div>
@@ -727,6 +842,39 @@
       <span class="menu-section-en">Grilled / Skewer</span>
       <h2 class="menu-section-ja">焼き物・串</h2>
     </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600&q=80" alt="だし巻き玉子">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">だし巻き玉子</div>
+          <div class="rec-price">605円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" alt="みつこのチヂミ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">みつこのチヂミ</div>
+          <div class="rec-price">858円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80" alt="やきとり たれ・ネギマ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">やきとり たれ・ネギマ</div>
+          <div class="rec-price">385円〜</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">にんにくバター</span><span class="menu-item-price">858円</span></div>
       <div class="menu-item"><span class="menu-item-name">だし巻き玉子</span><span class="menu-item-price">605円</span></div>
@@ -765,6 +913,49 @@
       <span class="menu-section-en">Fried</span>
       <h2 class="menu-section-ja">揚げ物</h2>
     </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80" alt="トウモロコシ天ぷら">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">トウモロコシ天ぷら</div>
+          <div class="rec-price">693円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=600&q=80" alt="とりの唐揚げ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">とりの唐揚げ</div>
+          <div class="rec-price">858円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1630431341973-02e1b662ec35?w=600&q=80" alt="ササミチーズカツ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">ササミチーズカツ</div>
+          <div class="rec-price">748円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1619881590738-a111d176d906?w=600&q=80" alt="ちくわの磯辺揚げ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">ちくわの磯辺揚げ</div>
+          <div class="rec-price">550円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">フライドポテト</span><span class="menu-item-price">385円</span></div>
       <div class="menu-item"><span class="menu-item-name">カリカリチーズ</span><span class="menu-item-price">666円</span></div>
@@ -796,6 +987,29 @@
       <h2 class="menu-section-ja">特撰</h2>
     </div>
     <p class="menu-note fade">※ 仕入れ状況により変わる場合がございます。</p>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80" alt="地鶏炭火焼き">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">地鶏炭火焼き</div>
+          <div class="rec-price">880円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1623689046286-e074832b8c28?w=600&q=80" alt="馬刺し赤身">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">馬刺し赤身</div>
+          <div class="rec-price">1,200円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">地鶏炭火焼き</span><span class="menu-item-price">880円</span></div>
       <div class="menu-item"><span class="menu-item-name">鶏ササミ炙り焼き</span><span class="menu-item-price">680円</span></div>
@@ -815,6 +1029,39 @@
       <span class="menu-section-en">Rice / Noodle</span>
       <h2 class="menu-section-ja">ご飯・麺</h2>
     </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="キムチチャーハン">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">キムチチャーハン</div>
+          <div class="rec-price">853円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80" alt="ソース焼きそば">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">ソース焼きそば</div>
+          <div class="rec-price">680円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&q=80" alt="お茶漬け（焼鮭）">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">お茶漬け（焼鮭）</div>
+          <div class="rec-price">770円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">おにぎり（こぶ／梅）</span><span class="menu-item-price">198円</span></div>
       <div class="menu-item"><span class="menu-item-name">おにぎり（焼鮭／しぐれ）</span><span class="menu-item-price">303円</span></div>
@@ -846,6 +1093,19 @@
       <h2 class="menu-section-ja">鍋</h2>
     </div>
     <p class="menu-note fade">※ 季節・仕入れ状況により変わる場合がございます。</p>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="もつ鍋">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">もつ鍋</div>
+          <div class="rec-price">1,320円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">キムチ鍋</span><span class="menu-item-price">1,100円</span></div>
       <div class="menu-item"><span class="menu-item-name">もつ鍋</span><span class="menu-item-price">1,320円</span></div>
@@ -860,6 +1120,29 @@
       <h2 class="menu-section-ja">お刺身・サラダ・デザート</h2>
     </div>
     <p class="menu-note fade">※ 刺身は仕入れ状況により変わる場合がございます。</p>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80" alt="タルイカ（刺身）">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">タルイカ（刺身）</div>
+          <div class="rec-price">825円</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-img">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="大根サラダ">
+          <span class="rec-badge">おすすめ</span>
+        </div>
+        <div class="rec-info">
+          <div class="rec-name">大根サラダ</div>
+          <div class="rec-price">825円</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-grid fade">
       <div class="menu-item"><span class="menu-item-name">タルイカ（刺身）</span><span class="menu-item-price">825円</span></div>
       <div class="menu-item"><span class="menu-item-name">ほたて（刺身）</span><span class="menu-item-price">825円</span></div>
